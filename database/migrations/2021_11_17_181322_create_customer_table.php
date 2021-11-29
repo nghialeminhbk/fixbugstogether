@@ -18,6 +18,7 @@ class CreateCustomerTable extends Migration
             $table->foreign('id')->references('id')->on('users');
             $table->string('display_name');
             $table->string('location');
+            $table->string('title');
             $table->string('image');
             $table->string('about_me');
             $table->string('website_link');

@@ -1,7 +1,7 @@
 @extends('layouts.welcome')
 
 @section('content')
-<main class="login-form">
+<main class="login-form my-3">
     <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-4">

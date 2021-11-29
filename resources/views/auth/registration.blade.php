@@ -1,7 +1,7 @@
 @extends('layouts.welcome')
 
 @section('content')
-<main class="signup-form">
+<main class="signup-form my-3">
     <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-4">

@@ -36,3 +36,4 @@ Route::get('/questions/view', [QuestionController::class, 'view'])->name('questi
 Route::get('/users', [UserController::class, 'index'])->name('users.list');
 Route::get('/users/{id}', [UserController::class, 'view'])->name('users.view');
 Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/edit/{id}', [UserController::class, 'update'])->name('users.update');
