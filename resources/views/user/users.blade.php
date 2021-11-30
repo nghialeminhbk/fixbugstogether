@@ -7,17 +7,17 @@
 </div>
 <div class="list-users">
     <div class="row">
-        @for($i=1; $i<=12; $i++)
+        @foreach($customers as $customer)
         <div class="col-3 d-flex align-items-center">
-            <img src="https://thuthuatnhanh.com/wp-content/uploads/2020/09/hinh-anh-avatar-de-thuong-chibi-ve-co-gai.jpg" alt="" style="width: 90px; height: 90px" class="img-fluid img-thumbnail rounded">
+            <img src="{{ asset($customer->image) }}" alt="" style="width: 90px; height: 90px" class="img-fluid img-thumbnail rounded">
             <div class="d-flex flex-column flex-grow-1 p-2">
-                <a href="{{ route('users.view', 2) }}" class="fw-bold text-primary">nghiatitan</a>
-                <span class="location text-muted">Ha Noi, Viet Nam</span>
-                <span class="amout posts fw-bold">1000</span>
-                <span class="time">15-10-2020</span>
+                <a href="{{ route('users.view', $customer->id) }}" class="fw-bold text-primary">{{ $customer->user()->name }}</a>
+                <span class="location text-muted">{{ $customer->location }}</span>
+                <span class="amout posts fw-bold">0</span>
+                <span class="time">{{ $customer->createdAt }}</span>
             </div>
         </div>
-        @endfor
+        @endforeach
     </div>
 </div>
 @endsection

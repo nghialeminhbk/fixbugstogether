@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function customer(){
+        return Customer::find($this->id);
+        return $this->hasOne(Customer::class, 'id');
+    }
+
     public function checkAdmin(){
         return $this->admin == 1?true:false;
     }

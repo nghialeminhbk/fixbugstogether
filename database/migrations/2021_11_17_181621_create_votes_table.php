@@ -15,8 +15,8 @@ class CreateVotesTable extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->references('id')->on('posts');
-            $table->foreignId('customer_id')->references('id')->on('customers');
+            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreignId('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->integer('value');
         });
     }

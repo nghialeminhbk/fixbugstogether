@@ -15,14 +15,14 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->foreign('id')->references('id')->on('users');
-            $table->string('display_name');
-            $table->string('location');
-            $table->string('title');
-            $table->string('image');
-            $table->string('about_me');
-            $table->string('website_link');
-            $table->string('github_link');
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('display_name')->nullable();
+            $table->string('location')->nullable();
+            $table->string('title')->nullable();
+            $table->string('image')->nullable();
+            $table->string('about_me')->nullable();
+            $table->string('website_link')->nullable();
+            $table->string('github_link')->nullable();
         });
     }
 

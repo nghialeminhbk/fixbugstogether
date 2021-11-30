@@ -4,14 +4,15 @@
 @section('sub_content')
 <div class="container_ px-3">
     <div class="avt d-flex mb-3">
-        <img src="https://i.stack.imgur.com/QgEPq.png?s=256&g=1" class="avt rounded img-fluid img-thumbnail" alt="" style="height: 100px; width: 100px">
+        <img src="{{ asset($image) }}" class="avt rounded img-fluid img-thumbnail" alt="" style="height: 120px; width: 120px">
         <div class="info d-flex flex-column px-2">
-            <h2 class="name">Nghia Titan</h2>
-            <span class="active text-muted"><i class="far fa-clock"></i> 10 days</span>
-            <span class="location text-muted"><i class="fas fa-map-marker-alt"></i> Viet Nam</span>
+            <h2 class="name">{{ $displayName }}</h2>
+            <span class="active text-muted fs-5">{{ $title }}</span>
+            <span class="active text-muted"><i class="far fa-clock"></i> {{ $timeJoined }}</span>
+            <span class="location text-muted"><i class="fas fa-map-marker-alt"></i> {{ $location }}</span>
         </div>
         <div class="flex-grow-1">
-            <a class="btn btn-outline-secondary float-end" href="{{ route('users.edit', 2) }}"><i class="fas fa-pencil-alt"></i> Edit profile</a>
+            <a class="btn btn-outline-secondary float-end" href="{{ route('users.edit', $id) }}"><i class="fas fa-pencil-alt"></i> Edit profile</a>
         </div>
     </div>
     <div class="profile">
@@ -36,18 +37,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-8 px-5">
                 <h5>About me</h5>
-                <p class="about--me">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid eligendi reprehenderit natus officia, alias quibusdam quam aspernatur temporibus magni voluptatibus.
-                </p>
+                <div class="about--me">
+                    {!! $aboutMe !!}
+                </div>
             </div>
         </div>
         <div class="mb-3 d-flex">
-            <h5>Link github:</h5> <a href="#" class="text-primary ms-2">nghia.github</a>
+            <h5>Link github:</h5> <a href="{{ $githubLink }}" class="text-primary ms-2">{{ $githubLink }}</a>
         </div>
         <div class="mb-3 d-flex">
-            <h5>Link website:</h5> <a href="#"  class="text-primary ms-2">nghia.fb</a>
+            <h5>Link website:</h5> <a href="{{ $websiteLink }}"  class="text-primary ms-2">{{ $websiteLink }}</a>
         </div>
     </div>
 </div>

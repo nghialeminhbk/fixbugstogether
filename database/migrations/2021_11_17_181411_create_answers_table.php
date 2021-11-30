@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->foreign('id')->references('id')->on('posts');
+            $table->foreign('id')->references('id')->on('posts')->onDelete('cascade');
             $table->longText('content');
         });
     }

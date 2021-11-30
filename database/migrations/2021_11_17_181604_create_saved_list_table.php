@@ -15,8 +15,8 @@ class CreateSavedListTable extends Migration
     {
         Schema::create('saved_list', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->references('id')->on('customers');
-            $table->foreignId('question_id')->references('id')->on('questions');
+            $table->foreignId('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreignId('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

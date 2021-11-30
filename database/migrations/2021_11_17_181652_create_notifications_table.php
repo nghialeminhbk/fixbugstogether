@@ -16,9 +16,9 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->boolean('read');
-            $table->foreignId('customer_id')->references('id')->on('customers');
-            $table->foreignId('sender_id')->references('id')->on('users');
-            $table->foreignId('question_id')->references('id')->on('questions');
+            $table->foreignId('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreignId('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->string('notification_type');
             $table->timestamps();
         });

@@ -14,8 +14,8 @@ class CreateQuestionTagTable extends Migration
     public function up()
     {
         Schema::create('question_tag', function (Blueprint $table) {
-            $table->foreignId('question_id')->references('id')->on('questions');
-            $table->foreignId('tag_id')->references('id')->on('tags');
+            $table->foreignId('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreignId('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

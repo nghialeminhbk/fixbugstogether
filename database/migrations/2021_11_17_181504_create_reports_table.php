@@ -16,8 +16,8 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->foreignId('post_id')->references('id')->on('posts');
-            $table->foreignId('customer_id')->references('id')->on('customers');
+            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreignId('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
         });
     }

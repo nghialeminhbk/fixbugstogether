@@ -21,12 +21,14 @@
 
     <div class="dropdown text-end">
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        <img @if(auth()->user()->customer()) src="{{ asset(auth()->user()->customer()->image) }}" @else src="{{ asset('css\577351.png') }}" @endif alt="mdo" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
         <li><a class="dropdown-item" href="#">New project...</a></li>
         <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="{{ route('users.view', 2) }}">Profile</a></li>
+        @auth
+        <li><a class="dropdown-item" href="{{ route('users.view', auth()->user()->id) }}">Profile</a></li>
+        @endauth
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href={{ route('signout') }}>Sign out</a></li>
         </ul>
