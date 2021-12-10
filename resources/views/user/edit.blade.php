@@ -1,6 +1,6 @@
 @extends('layouts.home-navbar')
 @section('title', 'Edit Profile -')
-@section('users', 'bg-light')
+@section('users', 'bg-light fw-bold')
 @section('sub_content')
 <div class="container bg-light">
     <div class="py-2">

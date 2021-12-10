@@ -11,9 +11,11 @@
             <span class="active text-muted"><i class="far fa-clock"></i> {{ $timeJoined }}</span>
             <span class="location text-muted"><i class="fas fa-map-marker-alt"></i> {{ $location }}</span>
         </div>
+        @if(auth()->user()->id == $id)
         <div class="flex-grow-1">
             <a class="btn btn-outline-secondary float-end" href="{{ route('users.edit', $id) }}"><i class="fas fa-pencil-alt"></i> Edit profile</a>
         </div>
+        @endif
     </div>
     <div class="profile">
         <div class="">
@@ -24,15 +26,15 @@
                 <h5>Stats</h5>
                 <div class="row p-2 border rounded">
                     <div class="col-6 py-2 text-center">
-                        <div>5</div>
+                        <div>{{ $postCount }}</div>
                         <div>posts</div>
                     </div>
                     <div class="col-6 py-2 text-center">
-                        <div class="">3</div>
+                        <div class="">{{ $questionCount }}</div>
                         <div>questions</div>
                     </div>
                     <div class="col-6 py-2 text-center">
-                        <div class="">2</div>
+                        <div class="">{{ $answerCount }}</div>
                         <div>answers</div>
                     </div>
                 </div>

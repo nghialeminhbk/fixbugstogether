@@ -15,10 +15,6 @@
         <li><a href="#" class="nav-link px-4 fw-bold text-dark">News</a></li>
     </ul>
 
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="GET" action="/dsadsa">
-        <input type="search" class="form-control form-control-dark border border-success" name="search" placeholder="Search..." aria-label="Search">
-    </form>
-
     <div class="text-end">
         <a href={{ route('login') }} type="button" class="btn btn-outline-secondary me-2">Login</a>
         <a href={{ route('register-user') }} type="button" class="btn btn-primary">Sign-up</a>

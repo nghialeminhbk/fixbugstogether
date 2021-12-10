@@ -4,32 +4,55 @@
 
 
 @section('content')
-<div class="container bg-light">
+<div class="container bg-light mb-3">
     <div class="py-4">
         <h1>Ask a public question</h1>
     </div>
     <div class="row">
         <div class="col-8">
             <div class="border p-3 bg-white shadow-sm">
-            <form>
+            <form action="{{ route('questions.post') }}" method="POST">
+                @csrf
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Title
                         <div class="form-text fw-light text-dark">Be specific and imagine you’re asking a question to another person</div>
                     </label>
-                    <input class="form-control" id="" aria-describedby="emailHelp" placeholder="e.g. Is there an R function for finding the index of an element in a vector?"">
+                    <input id="title" value="{{ old('title') }}" name="title" class="form-control @error('title') is-invalid @enderror" id="" aria-describedby="emailHelp" placeholder="e.g. Is there an R function for finding the index of an element in a vector?"">
+                    @error('title')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
-                <div class="mb-3">
+                <div id="similarQuestions">
+
+                </div>
+                <div class="my-3">
                     <label for="" class="form-label fw-bold">Body
                         <div class="form-text fw-light text-dark">Include all the information someone would need to answer your question</div>
                     </label>
-                    <div id="editor"></div>
-
-                    </div>
+                    <textarea class="@error('body') is-invalid @enderror" id="editor" name="body" row="10" col="80">
+                        {!! old('body') !!}
+                    </textarea>
+                    @error('body')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Tags
                         <div class="form-text fw-light text-dark">Add up to 5 tags to describe what your question is about</div>
                     </label>
-                    <input class="form-control" id="" aria-describedby="emailHelp" placeholder="e.g. (typescript laravel jquery)">
+                    <input id="tags" value="{{ old('tags') }}" name="tags" class="form-control @error('tags') is-invalid @enderror" id="" aria-describedby="emailHelp" placeholder="e.g. (typescript laravel jquery)">
+                    @error('tags')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="d-flex mt-2" id="suggestTag">
+                        
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Post your question</button>
             </form>
@@ -48,6 +71,47 @@
         .catch( error => {
             console.error( error );
         } );
+
+    $('#title').keyup(function (e) { 
+        var string = e.target.value;
+        var url = "{{ route('questions.suggest') }}";
+        setTimeout(() => {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {string: string},
+                dataType: "html",
+                success: function (response) {
+                    if(string != ""){
+                        $('#similarQuestions').html(response);
+                    }else{
+                        $('#similarQuestions').html("");
+                    }
+            }
+        });
+        }, 300);
+    });
+
+    $('#tags').keyup(function (e) { 
+        var string = e.target.value;
+        var url = "{{ route('tags.suggest') }}";
+        setTimeout(() => {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {string: string},
+                dataType: "html",
+                success: function (response) {
+                    if(string != ""){
+                        $('#suggestTag').html(response);
+                    }else{
+                        $('#suggestTag').html("");
+                    }
+            }
+        });
+        }, 100);
+    });
+    
 </script>
 
 @endsection

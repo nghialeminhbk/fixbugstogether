@@ -25,4 +25,27 @@ class Customer extends Model
         return User::find($this->id);
         return $this->belongsTo(User::class, 'id');
     }
+
+    public function post(){
+        return $this->hasMany(Post::class);
+    }
+
+    public function questions(){
+        return $this->hasManyThrough(
+            Question::class, 
+            Post::class, 
+            'customer_id',
+            'id',
+            'id',
+            'id'
+        );
+    }
+
+    public function countPost(){
+        return $this->withCount('post')->get();
+    } 
+
+    public function savedQuestions(){
+        return $this->belongsToMany(Question::class, 'saved_list', 'customer_id', 'question_id');
+    }
 }

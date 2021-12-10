@@ -10,7 +10,11 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
     public function index(){
-        $customers = Customer::all();
+        $now = Carbon::now();
+        $customers = Customer::withCount('post')->get();
+        foreach($customers as $customer){
+            $customer->created_at = $customer->user()->created_at->diffForHumans($now);
+        }
         return view('user.users', ['customers' => $customers]);
     }
 
@@ -19,8 +23,7 @@ class UserController extends Controller
         $createdAt= $user->created_at;
         $now = Carbon::now();
         $timeJoined = $createdAt->diffForHumans($now);
-        
-        $customer = Customer::find($id);
+        $customer = Customer::withCount(['post', 'questions'])->where('id', $id)->first();
         if(is_null($customer)){
             $displayName = $user->name;
         }else{
@@ -31,6 +34,9 @@ class UserController extends Controller
             $aboutMe = $customer->about_me;
             $websiteLink = $customer->website_link;
             $githubLink = $customer->github_link;
+            $postCount = $customer->post_count;
+            $questionCount = $customer->questions_count;
+            $answerCount = $postCount - $questionCount;
         }
         return view('user.view', [
             'id' => $id,
@@ -41,7 +47,10 @@ class UserController extends Controller
             'image' => $image??"",
             'aboutMe' => $aboutMe??"unknown",
             'websiteLink' => $websiteLink??"unknown",
-            'githubLink' => $githubLink??"unknown"
+            'githubLink' => $githubLink??"unknown",
+            'postCount' => $postCount,
+            'questionCount' => $questionCount,
+            'answerCount' => $answerCount
         ]);
     }
 
@@ -50,13 +59,13 @@ class UserController extends Controller
     
         return view('user.edit', [
             'id'           => $id,
-            'displayName' => $customer->displayName??"",
+            'displayName' => $customer->display_name??"",
             'location'     => $customer->location??"",
             'title'        => $customer->title??"",
             'image'        => $customer->image??"css\\577351.png", 
-            'aboutMe'     => $customer->aboutMe??"",
-            'githubLink'  => $customer->githubLink??"",
-            'websiteLink' => $customer->websiteLink??""
+            'aboutMe'     => $customer->about_me??"",
+            'githubLink'  => $customer->github_link??"",
+            'websiteLink' => $customer->website_link??""
         ]);
     }
 

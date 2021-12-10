@@ -25,12 +25,12 @@
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
         <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="{{ route('savedList', auth()->user()->id) }}">Saved list</a></li>
         @auth
         <li><a class="dropdown-item" href="{{ route('users.view', auth()->user()->id) }}">Profile</a></li>
         @endauth
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href={{ route('signout') }}>Sign out</a></li>
+        <li><a class="dropdown-item" href="{{ route('signout') }}" >Sign out</a></li>
         </ul>
     </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.home-navbar')
 @section('title', 'Users -')
-@section('users', 'bg-light')
+@section('users', 'bg-light fw-bold')
 @section('sub_content')
 <div class="title--users">
     <h2>List Users</h2>
@@ -13,8 +13,10 @@
             <div class="d-flex flex-column flex-grow-1 p-2">
                 <a href="{{ route('users.view', $customer->id) }}" class="fw-bold text-primary">{{ $customer->user()->name }}</a>
                 <span class="location text-muted">{{ $customer->location }}</span>
-                <span class="amout posts fw-bold">0</span>
-                <span class="time">{{ $customer->createdAt }}</span>
+                <div>
+                <span class="amout posts fw-bold">{{ $customer->post_count }}</span> posts
+                </div>
+                <span class="time"> {{ $customer->created_at }} </span>
             </div>
         </div>
         @endforeach

@@ -8,8 +8,8 @@
             <span class="fs-5 fw-semibold">Collapsible</span>
         </a>
         <ul class="list-unstyled ps-0">
-            <li class="mb-1 @yield('home')">
-                <a class="btn btn-toggle align-items-center rounded" href="{{ route('home') }}"  aria-expanded="false"><i class="fas fa-home"></i> 
+            <li class="mb-1">
+                <a class="btn btn-toggle d-flex justify-content-start rounded @yield('home')" href="{{ route('home') }}"  aria-expanded="false"><i class="fas fa-home me-1"></i> 
                     Home
                 </a>
             </li>
