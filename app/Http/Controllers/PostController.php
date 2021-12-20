@@ -12,6 +12,7 @@ use App\Models\Tag;
 use App\Models\QuestionTag;
 use App\Models\SavedList;
 use App\Models\Vote;
+use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -50,11 +51,23 @@ class PostController extends Controller
             ['customer_id', '=', Auth::id()]
         ])->first()->value??0;
 
+        //report
+        $checkRpQues = Report::where([
+            ['post_id', '=', $question['id']],
+            ['customer_id', '=', Auth::id()]
+        ])->first()?true:false;
+
         foreach($answers as $answer){
             $checkVote = Vote::where([
                 ['post_id', '=', $answer['id']],
                 ['customer_id', '=', Auth::id()]
             ])->first()->value??0;
+
+            $checkRp = Report::where([
+                ['post_id', '=', $answer['id']],
+                ['customer_id', '=', Auth::id()]
+            ])->first()?true:false;
+
             array_push($answersData, [
                 'id'           => $answer->id,
                 'content'      => $answer->content,
@@ -65,7 +78,8 @@ class PostController extends Controller
                 'userId'       => $answer->post()->user()->first()->id,
                 'comments'     => $answer->comment()->get(),
                 'totalVote'    => $answer->post()->totalVote(),
-                'checkVote'    => $checkVote
+                'checkVote'    => $checkVote,
+                'checkRp'      => $checkRp
             ]);
         }
         
@@ -79,7 +93,8 @@ class PostController extends Controller
                 'comments'       => $question->comment()->get(),
                 'checkSavedList' => $checkSavedList,
                 'totalVote'      => $post->totalVote(),
-                'checkVote'      => $checkVoteQues
+                'checkVote'      => $checkVoteQues,
+                'checkRp'        => $checkRpQues
             ],
             'user' => [
                 'id'        => $user->id,
@@ -156,7 +171,7 @@ class PostController extends Controller
         foreach($questions as $question){
             $question->body = Str::limit($question->body, 100);
             $question->createdAt = $question->post()->first()->created_at->diffForHumans($now);
-            $question->userName = $question->post()->first()->user()->first()->name;
+            $question->user = $question->post()->first()->user()->first();
         }
         return view('question.suggest', ['questions' => $questions]);
     }
@@ -215,6 +230,29 @@ class PostController extends Controller
         ])->delete();
         return response()->json([
             'message' => $result>0?"Remove vote successful":"Fail remove vote !"
+        ]);
+    }
+
+    public function report(Request $request){
+        Report::create([
+            'content' => $request->content,
+            'post_id' => $request->postId,
+            'customer_id' => $request->customerId
+        ]);
+        
+        return response()->json([
+            'message' => 'Report successful !'
+        ]);
+    }
+
+    public function removeReport(Request $request){
+        Report::where([
+            ['post_id','=', $request->postId],
+            ['customer_id', '=', $request->customerId]
+        ])->first()->delete();
+        
+        return response()->json([
+            'message' => 'Remove report successful !'
         ]);
     }
 

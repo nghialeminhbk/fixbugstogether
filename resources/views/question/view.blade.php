@@ -58,7 +58,13 @@
                 <div class="" id="addSavedList"><i class="far fa-bookmark"></i></div>
                 <div class="d-none" id="removeSavedList"><i class="fas fa-bookmark text-secondary"></i></div>
             @endif
-                <div class=""><i class="far fa-flag"></i></div>
+            @if($question['checkRp'])
+                <div class="d-none"><i class="btn-up-report far fa-flag"></i></div>
+                <div class=""><i class="btn-remove-report text-secondary fas fa-flag"></i></div>
+            @else
+                <div class=""><i class="btn-up-report far fa-flag"></i></div>
+                <div class="d-none"><i class="btn-remove-report text-secondary fas fa-flag"></i></div>
+            @endif
             </div>
             <div class="content-question flex-grow-1 d-flex flex-column px-2">
                 <div class="mb-3">
@@ -94,12 +100,15 @@
                 </div>
                 <div class="ps-3">
                 @foreach($question['comments'] as $comment)
-                <div class="border-top py-2">
-                    <div class="d-flex">
-                        <a href="{{ route('users.view', $comment->customer_id) }}" class="me-2">{{ $comment->user()->first()->name }}</a>
-                        <span class="text-muted fs-6">{{ $comment->created_at }}</span>
+                <div class="d-flex align-items-center border-top py-2">
+                    <img src="{{ asset($comment->user()->first()->customer()->image) }}" alt="" style="width:45px; height:45px" class="me-2 border border-2 border-white rounded-circle">
+                    <div class="">
+                        <div class="d-flex">
+                            <a href="{{ route('users.view', $comment->customer_id) }}" class="me-2">{{ $comment->user()->first()->name }}</a>
+                            <span class="text-muted fs-6">{{ $comment->created_at }}</span>
+                        </div>
+                        <div class="">{{ $comment->comment }}</div>
                     </div>
-                    <div class="">{{ $comment->comment }}</div>
                 </div>
                 @endforeach
                 </div>
@@ -144,7 +153,13 @@
                 <div class=""><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
                 <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
             @endif
-                <div class=""><i class="far fa-flag"></i></div>
+            @if($answer['checkRp'])
+                <div class="d-none"><i class="btn-up-report far fa-flag"></i></div>
+                <div class=""><i class="btn-remove-report text-secondary fas fa-flag"></i></div>
+            @else
+                <div class=""><i class="btn-up-report far fa-flag"></i></div>
+                <div class="d-none"><i class="btn-remove-report text-secondary fas fa-flag"></i></div>
+            @endif
             </div>
             <div class="content-question flex-grow-1 d-flex flex-column px-2">
                 <div class="mb-3">
@@ -175,12 +190,15 @@
                 </div>
                 <div class="ps-3">
                 @foreach($answer['comments'] as $comment)
-                <div class="border-top py-2">
-                    <div class="d-flex">
-                        <a href="" class="me-2">{{ $comment->user()->first()->name }}</a>
-                        <span class="text-muted fs-6">{{ $comment->created_at }}</span>
+                <div class="d-flex align-items-center border-top py-2">
+                    <img src="{{ asset($comment->user()->first()->customer()->image) }}" alt="" style="width:45px; height:45px" class="me-2 border border-2 border-white rounded-circle">
+                    <div class="">
+                        <div class="d-flex">
+                            <a href="{{ route('users.view', $comment->customer_id) }}" class="me-2">{{ $comment->user()->first()->name }}</a>
+                            <span class="text-muted fs-6">{{ $comment->created_at }}</span>
+                        </div>
+                        <div class="">{{ $comment->comment }}</div>
                     </div>
-                    <div class="content--comment">{{ $comment->comment }}</div>
                 </div>
                 @endforeach
                 </div>
@@ -217,6 +235,27 @@
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, illo aspernatur odio ratione velit facilis optio expedita pariatur. Obcaecati, voluptatem sequi saepe eligendi voluptates voluptatum minus ratione accusantium minima tempore?
     </div>
 </div>
+
+<!-- modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="text-dark fas fa-flag"></i> Report Content</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input id="report-content" type="text" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="btn-send-report" class="btn btn-primary">Send report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     ClassicEditor
         .create( document.querySelector( '#editor' ) )
@@ -346,8 +385,55 @@
     })
 
 
-    $('#liveToastBtn').on('click', function(){
-        toastr.success("Hello bn nho");
+    $(".btn-up-report").on('click', function(){
+        $('#myModal').modal('show');
+        var index = $(".btn-up-report").index(this);
+        $('#btn-send-report').val(index);
+        console.log($('#btn-send-report').val());
     })
+
+    $(".btn-remove-report").on('click', function(){
+        $(this).parent().addClass('d-none');
+        $(this).parent().prev().removeClass('d-none');
+        var index = $('#btn-send-report').val();
+        var postId = $(".value-vote").eq(index).attr("value");
+        $.ajax({
+            type: "GET",
+            url: "{{ route('report.remove') }}",
+            data: {
+                "_token": "{{ csrf_token() }}", 
+                "postId": postId, 
+                "customerId": "{{ Auth::id() }}",
+            },
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response['message']);
+            }
+        });
+    })
+
+    $("#btn-send-report").on('click', function(){
+        var content = $('#report-content').val();
+        var index = $('#btn-send-report').val();
+        $('.btn-up-report').eq(index).parent().addClass('d-none');
+        $('.btn-remove-report').eq(index).parent().removeClass('d-none');
+        $('#myModal').modal('hide');
+        var postId = $(".value-vote").eq(index).attr("value");
+        $.ajax({
+            type: "POST",
+            url: "{{ route('report') }}",
+            data: {
+                "_token": "{{ csrf_token() }}", 
+                "postId": postId, 
+                "customerId": "{{ Auth::id() }}",
+                "content" : content 
+            },
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response['message']);
+            }
+        });
+    })
+   
 </script>
 @endsection

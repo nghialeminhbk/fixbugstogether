@@ -20,7 +20,7 @@
                     <div class="text-muted fs-6">
                         {!! $question->body !!}
                     </div>
-                    <span class="float-end">asked {{ $question->createdAt }} by <a href="{{ route('users.view', $question['user']['id']) }}">{{ $question->userName }}</a></span>
+                    <span class="float-end">asked {{ $question->createdAt }} by <a href="{{ route('users.view', $question['user']['id']) }}">{{ $question['user']['name']}}</a></span>
                 </div>
             </div>
             @endforeach

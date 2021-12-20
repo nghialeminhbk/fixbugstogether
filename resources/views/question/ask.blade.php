@@ -31,7 +31,7 @@
                     <label for="" class="form-label fw-bold">Body
                         <div class="form-text fw-light text-dark">Include all the information someone would need to answer your question</div>
                     </label>
-                    <textarea class="@error('body') is-invalid @enderror" id="editor" name="body" row="10" col="80">
+                    <textarea class="@error('body') is-invalid @enderror" id="editor" name="body" rows="10" cols="50">
                         {!! old('body') !!}
                     </textarea>
                     @error('body')
@@ -72,8 +72,21 @@
             console.error( error );
         } );
 
+    // ClassicEditor
+    // .create( document.querySelector( '#editor' ), {
+    //     codeBlock: {
+    //         languages: [
+    //             { language: 'css', label: 'CSS' },
+    //             { language: 'html', label: 'HTML' }
+    //         ]
+    //     }
+    // } )
+    // .then( ... )
+    // .catch( ... );
+
     $('#title').keyup(function (e) { 
         var string = e.target.value;
+        console.log(string);
         var url = "{{ route('questions.suggest') }}";
         setTimeout(() => {
             $.ajax({
@@ -89,7 +102,7 @@
                     }
             }
         });
-        }, 300);
+        }, 100);
     });
 
     $('#tags').keyup(function (e) { 
@@ -113,5 +126,4 @@
     });
     
 </script>
-
 @endsection

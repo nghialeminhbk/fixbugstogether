@@ -42,7 +42,7 @@ class Customer extends Model
     }
 
     public function countPost(){
-        return $this->withCount('post')->get();
+        return Post::where('customer_id',$this->id)->count();
     } 
 
     public function savedQuestions(){

@@ -59,3 +59,10 @@ Route::get('/tags/suggest', [TagController::class, 'suggest'])->name('tags.sugge
 //votes
 Route::post('/questions/vote/add', [PostController::class, 'addVote'])->name('votes.add');
 Route::get('/questions/vote/delete', [PostController::class, 'removeVote'])->name('votes.delete');
+
+// search
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+//report
+Route::post('/report', [PostController::class, 'report'])->name('report');
+Route::get('/report', [PostController::class, 'removeReport'])->name('report.remove');
