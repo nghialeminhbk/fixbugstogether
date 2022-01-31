@@ -6,7 +6,7 @@
     <div class="col-9">
         <div class="border-bottom pb-3">
             <div class="d-flex flex-row">
-                <h1 class="flex-grow-1">Top Questions </h1>
+                <h2 class="flex-grow-1">Top Questions </h2>
                 <div class="flex-grow-0"><a class="btn btn-primary" href={{ route('questions.ask') }} >Ask Question</a></div>
             </div>
             <div class="d-flex flex-row justify-content-end">
@@ -20,12 +20,12 @@
             </div>
         </div>
         @foreach($questions as $question)
-        <div class="d-flex flex-row border-bottom">
+        <div class="d-flex flex-row border-bottom py-3">
             <div class="text-center px-3 d-flex flex-column justify-content-center">
                 <div class="">-1</div>
                 <span>votes</span>
             </div>
-            <div class="text-center px-3 d-flex flex-column justify-content-center">
+            <div class="text-center px-3 d-flex flex-column justify-content-center border border-success rounded">
                 <div class="">0</div>
                 <span>answers</span>
             </div>
@@ -34,11 +34,11 @@
                 <span>views</span>
             </div>
             <div class="flex-grow-1 p-3 d-flex flex-column justify-content-center">
-                <h4><a href="{{ route('questions.view', $question['id']) }}" class="text-primary">{{ $question['title'] }}</a></h4>
+                <h4 class="mb-3"><a href="{{ route('questions.view', $question['id']) }}" class="text-primary">{{ $question['title'] }}</a></h4>
                 <div class="d-flex">
                     <div class="flex-grow-1">
                         @foreach($question['tags'] as $tag)
-                        <a href="" class="bg-light p-2">{{ $tag['tag_name'] }}</a>
+                        <a href="" class="bg-warning rounded p-2 me-2">{{ $tag['tag_name'] }}</a>
                         @endforeach
                     </div>
                     <div class="d-flex flex-row">

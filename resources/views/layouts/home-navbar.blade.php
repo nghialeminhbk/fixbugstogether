@@ -3,10 +3,9 @@
 <div class="row px-5 bg-white">
     <div class="col-2 border-end flex p-0">
     <div id="fixed-navbar" class="flex-grow-1 flex-shrink-0 py-3 bg-white float-end" >
-        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
+        <!-- <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
             <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-            <span class="fs-5 fw-semibold">Collapsible</span>
-        </a>
+        </a> -->
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <a class="btn btn-toggle d-flex justify-content-start rounded @yield('home')" href="{{ route('home') }}"  aria-expanded="false"><i class="fas fa-home me-1"></i> 

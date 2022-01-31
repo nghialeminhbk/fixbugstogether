@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function customer(){
         return Customer::find($this->id);
-        return $this->hasOne(Customer::class, 'id');
+        // return $this->hasOne(Customer::class, 'id');
     }
 
     public function checkAdmin(){

@@ -20,7 +20,7 @@ class CreateCustomerTable extends Migration
             $table->string('location')->nullable();
             $table->string('title')->nullable();
             $table->string('image')->nullable();
-            $table->string('about_me')->nullable();
+            $table->longText('about_me')->nullable();
             $table->string('website_link')->nullable();
             $table->string('github_link')->nullable();
         });

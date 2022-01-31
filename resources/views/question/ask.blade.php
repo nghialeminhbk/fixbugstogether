@@ -67,22 +67,10 @@
 </div>
 <script>
     ClassicEditor
-        .create( document.querySelector( '#editor' ) )
+        .create( document.querySelector( '#editor' ))
         .catch( error => {
             console.error( error );
         } );
-
-    // ClassicEditor
-    // .create( document.querySelector( '#editor' ), {
-    //     codeBlock: {
-    //         languages: [
-    //             { language: 'css', label: 'CSS' },
-    //             { language: 'html', label: 'HTML' }
-    //         ]
-    //     }
-    // } )
-    // .then( ... )
-    // .catch( ... );
 
     $('#title').keyup(function (e) { 
         var string = e.target.value;

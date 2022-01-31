@@ -4,7 +4,7 @@
 @section('sub_content')
 <div class="border-bottom pb-3">
     <div class="d-flex">
-        <h2 class="flex-grow-1">{{ $question['title'] }}</h2>
+        <h3 class="flex-grow-1">{{ $question['title'] }}</h3>
         <a href="{{ route('questions.ask') }}" class="btn btn-primary">Ask Question</a>
     </div>
     <div class="d-flex">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="d-flex mb-5">
                     @foreach($question['tags'] as $tag)
-                    <a class="py-1 px-2 me-3 bg-warning">{{ $tag->tag_name }}</a>
+                    <a class="py-1 px-2 me-3 bg-warning rounded">{{ $tag->tag_name }}</a>
                     @endforeach
                 </div>
                 <div class="d-flex pb-3">
@@ -80,7 +80,7 @@
                         <a href="" class="me-2">Share</a>
                         <a href="" class="me-2">Follow</a>
                     </div>
-                    <div class="border shadow-sm" style="width: 250px">
+                    <div class="border shadow-sm rounded" style="width: 250px">
                         <div class="bg-light p-2">
                             <div class="">
                                 asked <span>{{ $user['timeAsked'] }}</span>
@@ -170,7 +170,7 @@
                         <a href="" class="me-2">Share</a>
                         <a href="" class="me-2">Follow</a>
                     </div>
-                    <div class="border shadow-sm" style="width: 250px">
+                    <div class="border shadow-sm rounded" style="width: 250px">
                         <div class="bg-light p-2">
                             <div class="">
                                 answered <span>{{ $answer['timeAnswered'] }}</span>
@@ -226,7 +226,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                <button type="submit" class="btn btn-primary mt-3">Post your question</button>
+                <button type="submit" class="btn btn-primary mt-3" id="post-answer">Post your question</button>
             </form>
         </div>
     </div>
@@ -435,5 +435,22 @@
         });
     })
    
+   $("#post-answer").click(function(){
+       $.ajax({
+           type: "POST",
+           url: "{{ route('notifications.create') }}",
+           data: {
+            "_token": "{{ csrf_token() }}", 
+            "content": "đã trả lời bài đăng",
+            "customerId": {{ $user['id'] }},
+            "senderId": {{ auth()->user()->id }},
+            "questionId": {{ $question['id'] }}
+           },
+           dataType: "json",
+           success: function (response) {
+               console.log("create notification!");
+           }
+       });
+   })
 </script>
 @endsection

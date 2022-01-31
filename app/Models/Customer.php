@@ -41,6 +41,17 @@ class Customer extends Model
         );
     }
 
+    public function answer(){
+        return $this->hasManyThrough(
+            Answer::class,
+            Post::class,
+            'customer_id',
+            'id',
+            'id',
+            'id'
+        );
+    }
+
     public function countPost(){
         return Post::where('customer_id',$this->id)->count();
     } 

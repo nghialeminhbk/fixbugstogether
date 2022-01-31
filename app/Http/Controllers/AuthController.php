@@ -25,7 +25,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if($user->admin){
-                return redirect()->intended('admin')
+                return redirect()->intended('admin/dashboard')
                         ->withSuccess('Signed in');
             }
             return redirect()->intended('/')
@@ -78,6 +78,6 @@ class AuthController extends Controller
     }
 
     public function admin(){
-        return view('admin.home');
+        return view('admin.dashboard');
     }
 }

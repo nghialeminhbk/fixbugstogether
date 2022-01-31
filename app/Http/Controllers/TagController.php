@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use Illuminate\Support\Str;
+
 class TagController extends Controller
 {
     //  
@@ -14,6 +16,38 @@ class TagController extends Controller
         $tags = Tag::withCount('questionTag')->where('tag_name', 'like', $keySearch.'%')->orderBy('question_tag_count', 'DESC')->take(3)->get();
         return view('tag.suggest', [
             'tags' => $tags
+        ]);
+    }
+
+    public function listTags(){
+        $tags = Tag::all();
+        foreach($tags as $tag){
+            $tag->description = Str::limit($tag->description, 20);
+        }
+        return view('admin.components.table.tag_list', [
+            'tags' => $tags
+        ]);
+    }
+
+    public function tagDetail($id){
+        $tag = Tag::find($id);
+        return view('admin.components.modal.modal_tag', ['tag' => $tag]);
+    }
+
+    public function tagUpdate($id, Request $request){
+        $tag = Tag::find($id);
+        $tag->description = $request->description;
+        $tag->save();
+        return response()->json([
+            'message' => 'Update success!'
+        ]); 
+    }
+
+    public function tagDelete($id){
+        $tag = Tag::find($id);
+        $tag->delete();
+        return response()->json([
+            'message' => 'Delete success!'
         ]);
     }
 }

@@ -48,9 +48,9 @@ class UserController extends Controller
             'aboutMe' => $aboutMe??"unknown",
             'websiteLink' => $websiteLink??"unknown",
             'githubLink' => $githubLink??"unknown",
-            'postCount' => $postCount,
-            'questionCount' => $questionCount,
-            'answerCount' => $answerCount
+            'postCount' => $postCount??0,
+            'questionCount' => $questionCount??0,
+            'answerCount' => $answerCount??0
         ]);
     }
 
@@ -98,5 +98,16 @@ class UserController extends Controller
         );
 
         return redirect()->route('users.view', $id);
+    }
+
+    public function customerDetail($customerId){
+        $customer = Customer::find($customerId);
+        return view('admin.components.modal.modal_user', ['data' => $customer]);
+    }
+
+    public function userDelete($id){
+        $user = User::find($id);
+        $user->delete();
+        return response()->json(['message' => 'Delete user success!']);
     }
 }

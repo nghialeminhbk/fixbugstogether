@@ -256,4 +256,39 @@ class PostController extends Controller
         ]);
     }
 
+    public function questionDetail($id){
+        $question = Question::find($id);
+        $post = $question->post()->first();
+        $user = User::find($post->customer_id);
+        $question->user = $user->name;
+        $question->createdAt = $post->created_at;
+        return view('admin.components.modal.modal_question', ['question' => $question]);
+    }
+
+    public function questionDelete($id){
+        $post = Post::find($id);
+        $post->delete();
+        return response()->json([
+            'message' => 'Delete success!'
+        ]);
+    }
+
+    public function viewPostDetail($id){
+        $post = Post::find($id);
+        $post->user = User::find($post->customer_id)->name;
+        $post->type = Question::find($id)?"question":"answer";
+        $post->content = Question::find($id)??Answer::find($id);
+        return view("admin.components.modal.modal_post", [
+            'data' => $post
+        ]);
+    }
+
+    public function deletePost($id){
+        $post = Post::find($id);
+        $post->delete();
+        return response()->json([
+            'message' => 'Delete success!'
+        ]);
+    }
+
 }
