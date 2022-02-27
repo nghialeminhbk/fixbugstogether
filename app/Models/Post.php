@@ -24,4 +24,15 @@ class Post extends Model
     public function totalVote(){
         return Vote::where('post_id', $this->id)->sum('value');
     }
+
+    public function question(){
+        $answer = Answer::find($this->id);
+        if(is_null($answer)){
+            return $this;
+        }else{
+            $question = $answer->question()->first();
+            $post = $question->post()->first();
+            return $post;
+        }
+    }
 }

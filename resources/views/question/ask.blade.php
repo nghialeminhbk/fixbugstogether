@@ -59,8 +59,19 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="p-3 shadow-sm bg-white border">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, quidem voluptates autem ducimus doloremque quasi corporis facilis voluptatem? Rerum illum omnis sed quidem cupiditate est quas blanditiis. Eos, facere asperiores! Rerum dolorum dolores fugiat? Vitae pariatur delectus vel rem veritatis, sunt minus unde. Ullam odit quisquam voluptatum minus modi tenetur maiores fugit alias. Possimus molestiae aliquam quos exercitationem. Modi aut, optio odio voluptates quo commodi corrupti ut asperiores repellat eum iure placeat laborum animi praesentium unde quibusdam illum odit voluptas dolorum minima vitae quidem nesciunt blanditiis! Ipsum animi accusamus libero? Provident enim voluptate facilis doloremque odit eveniet quam, vel ratione.
+            <div class="shadow-box border card">
+                <div class="card-header bg-info text-center fw-bold">
+                    Guideline
+                </div>
+                <div class="card-body bg-blue">           
+                Follow these rules for a quality question
+                    <ul>
+                        <li>Fill in the fields completely</li>
+                        <li>Avoid posting duplicate questions</li>
+                        <li>Use the cue to see similar questions</li>
+                        <li>The content of the question should not be less than 50 words</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

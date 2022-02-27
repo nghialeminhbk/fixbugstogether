@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,7 @@ Route::post('/comments/post/{id}', [CommentController::class, 'store'])->name('c
 
 
 //tags
+Route::get('/tags', [TagController::class, 'viewTags'])->name('tags');
 Route::get('/tags/suggest', [TagController::class, 'suggest'])->name('tags.suggest');
 Route::get('tags/list', [TagController::class, 'listTags'])->name('tags.list');
 Route::get('tags/detail/{id}', [TagController::class, 'tagDetail'])->name('tags.detail');
@@ -81,6 +83,7 @@ Route::get('/search', [HomeController::class, 'search'])->name('search');
 //report
 Route::post('/report', [PostController::class, 'report'])->name('report');
 Route::get('/report', [PostController::class, 'removeReport'])->name('report.remove');
+Route::get('/report/delete/{id}', [PostController::class, 'removeReportById'])->name('report.removeById');
 
 //notification
 Route::get('/notifications/count-not-check/{userId}', [NotificationController::class, 'countNotificationsNotCheckOfUser'])->name('notification.notCheck');
@@ -88,6 +91,10 @@ Route::get('/notifications/dropdown/{userId}', [NotificationController::class,'v
 Route::get('/notifications/read/{id}', [NotificationController::class, 'setCheckNotification'])->name('notifications.read');
 Route::get('/notifications/{userId}', [NotificationController::class, 'viewNotificationsList'])->name('notifications.list');
 Route::post('/notifications', [NotificationController::class, 'createNotification'])->name('notifications.create');
+
+//news
+Route::get('/news/{type}', [NewsController::class, 'getList'])->name('news');
+Route::get('/news/{type}/{id}', [NewsController::class, 'getDetail'])->name('news.detail');
 
 //admin dashboard
 Route::middleware(['auth', 'admin'])->group(function(){

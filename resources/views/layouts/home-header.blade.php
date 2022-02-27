@@ -16,7 +16,7 @@
     </ul>
 
     <form class="col-6 col-lg-4 mb-3 mb-lg-0 me-lg-3" action="{{ route('search') }}" method="get" >
-        <input name="search" type="search" class="form-control" placeholder="... user:[user name]... to search user.." aria-label="Search">
+        <input name="search" type="search" class="form-control" placeholder="Enter the key search ..." aria-label="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="user:[user name] to search user and tag:[tag name] to search tag">
     </form>
 
     <div class="dropdown text-white">
@@ -39,7 +39,7 @@
 
     <div class="dropdown text-white">
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img @if(auth()->user()->customer()) src="{{ asset(auth()->user()->customer()->image) }}" @else src="{{ asset('css\577351.png') }}" @endif alt="mdo" width="45" height="45" class="rounded-circle border border-2 border-secondary">
+        <img @if(auth()->user()->customer()) src="{{ asset(auth()->user()->customer()->image) }}" @else src="{{ asset('css\577351.png') }}" @endif alt="mdo" width="45" height="45" class="rounded-circle border border-2 border-secondary shadow-box">
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="{{ route('savedList', auth()->user()->id) }}">Saved list</a></li>
@@ -54,6 +54,8 @@
 </div>
 </header>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+
     $(window).on('load', function(){
         const url = "http://127.0.0.1:8000/notifications/count-not-check/{{ auth()->user()->id }}";
         setInterval(() => {

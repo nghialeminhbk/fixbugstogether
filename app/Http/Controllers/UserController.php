@@ -12,10 +12,14 @@ class UserController extends Controller
     public function index(){
         $now = Carbon::now();
         $customers = Customer::withCount('post')->get();
+        $totalUsers = count($customers);
         foreach($customers as $customer){
             $customer->created_at = $customer->user()->created_at->diffForHumans($now);
         }
-        return view('user.users', ['customers' => $customers]);
+        return view('user.users', [
+            'customers' => $customers,
+            'totalUsers' => $totalUsers
+        ]);
     }
 
     public function view($id){

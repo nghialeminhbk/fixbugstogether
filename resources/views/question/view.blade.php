@@ -28,35 +28,35 @@
             <div class="d-flex flex-column align-items-center pe-2 fs-3">
             @if($question['checkVote']==0)
                 <div class=""><i class="btn-up-vote fas fa-sort-up"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-warning"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-orange"></i></div>
                 <div class="d-none"><i class="btn-none-vote fas fa-sort-up text-secondary"></i></div>
                 <div class="value-vote" value="{{ $question['id'] }}" >{{ $question['totalVote'] }}</div>
-                <div class=""><i class="btn-down-vote fas fa-sort-down"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
-                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
+                <div class=""><i class="btn-down-vote fas fa-sort-down mb-3"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-orange mb-3"></i></div>
+                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary mb-3"></i></div>
             @elseif($question['checkVote']==1)
                 <div class="d-none"><i class="btn-up-vote fas fa-sort-up"></i></div>
-                <div class=""><i class="btn-remove-vote fas fa-sort-up text-warning"></i></div>
+                <div class=""><i class="btn-remove-vote fas fa-sort-up text-orange"></i></div>
                 <div class="d-none"><i class="btn-none-vote fas fa-sort-up text-secondary"></i></div>
                 <div class="value-vote" value="{{ $question['id'] }}" >{{ $question['totalVote'] }}</div>
-                <div class="d-none"><i class="btn-down-vote fas fa-sort-down"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
-                <div class=""><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
+                <div class="d-none"><i class="btn-down-vote fas fa-sort-down mb-3" ></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-orange mb-3"></i></div>
+                <div class=""><i class="btn-none-vote fas fa-sort-down text-secondary mb-3"></i></div>
             @else
                 <div class="d-none"><i class="btn-up-vote fas fa-sort-up"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-warning"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-orange"></i></div>
                 <div class=""><i class="btn-none-vote fas fa-sort-up text-secondary"></i></div>
                 <div class="value-vote" value="{{ $question['id'] }}" >{{ $question['totalVote'] }}</div>
-                <div class="d-none"><i class="btn-down-vote fas fa-sort-down"></i></div>
-                <div class=""><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
-                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
+                <div class="d-none"><i class="btn-down-vote fas fa-sort-down mb-3"></i></div>
+                <div class=""><i class="btn-remove-vote fas fa-sort-down text-orange mb-3"></i></div>
+                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary mb-3"></i></div>
             @endif
             @if($question['checkSavedList'])
-                <div class="d-none" id="addSavedList"><i class="far fa-bookmark"></i></div>
-                <div class="" id="removeSavedList"><i class="fas fa-bookmark text-secondary"></i></div>
+                <div class="d-none" id="addSavedList"><i class="far fa-bookmark mb-3"></i></div>
+                <div class="" id="removeSavedList"><i class="fas fa-bookmark text-secondary mb-3"></i></div>
             @else
-                <div class="" id="addSavedList"><i class="far fa-bookmark"></i></div>
-                <div class="d-none" id="removeSavedList"><i class="fas fa-bookmark text-secondary"></i></div>
+                <div class="" id="addSavedList"><i class="far fa-bookmark mb-3"></i></div>
+                <div class="d-none" id="removeSavedList"><i class="fas fa-bookmark text-secondary mb-3"></i></div>
             @endif
             @if($question['checkRp'])
                 <div class="d-none"><i class="btn-up-report far fa-flag"></i></div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="d-flex mb-5">
                     @foreach($question['tags'] as $tag)
-                    <a class="py-1 px-2 me-3 bg-warning rounded">{{ $tag->tag_name }}</a>
+                    <a class="py-1 px-2 me-3 tag-color rounded">{{ $tag->tag_name }}</a>
                     @endforeach
                 </div>
                 <div class="d-flex pb-3">
@@ -81,7 +81,7 @@
                         <a href="" class="me-2">Follow</a>
                     </div>
                     <div class="border shadow-sm rounded" style="width: 250px">
-                        <div class="bg-light p-2">
+                        <div class="bg-blue p-2">
                             <div class="">
                                 asked <span>{{ $user['timeAsked'] }}</span>
                             </div>
@@ -130,32 +130,32 @@
             <div class="d-flex flex-column align-items-center pe-2 fs-3">
             @if($answer['checkVote']==0)
                 <div class=""><i class="btn-up-vote fas fa-sort-up"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-warning"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-orange"></i></div>
                 <div class="d-none"><i class="btn-none-vote fas fa-sort-up text-secondary"></i></div>
                 <div class="value-vote" value="{{ $answer['id'] }}" >{{ $answer['totalVote'] }}</div>
-                <div class=""><i class="btn-down-vote fas fa-sort-down"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
-                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
+                <div class=""><i class="btn-down-vote fas fa-sort-down mb-3"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-orange mb-3"></i></div>
+                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary mb-3"></i></div>
             @elseif($answer['checkVote']==1)
                 <div class="d-none"><i class="btn-up-vote fas fa-sort-up"></i></div>
-                <div class=""><i class="btn-remove-vote fas fa-sort-up text-warning"></i></div>
+                <div class=""><i class="btn-remove-vote fas fa-sort-up text-orange"></i></div>
                 <div class="d-none"><i class="btn-none-vote fas fa-sort-up text-secondary"></i></div>
                 <div class="value-vote" value="{{ $answer['id'] }}" >{{ $answer['totalVote'] }}</div>
-                <div class="d-none"><i class="btn-down-vote fas fa-sort-down"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
-                <div class=""><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
+                <div class="d-none"><i class="btn-down-vote fas fa-sort-down mb-3"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-down text-orange mb-3"></i></div>
+                <div class=""><i class="btn-none-vote fas fa-sort-down text-secondary mb-3"></i></div>
             @else
                 <div class="d-none"><i class="btn-up-vote fas fa-sort-up"></i></div>
-                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-warning"></i></div>
+                <div class="d-none"><i class="btn-remove-vote fas fa-sort-up text-orange"></i></div>
                 <div class=""><i class="btn-none-vote fas fa-sort-up text-secondary"></i></div>
                 <div class="value-vote" value="{{ $answer['id'] }}" >{{ $answer['totalVote'] }}</div>
-                <div class="d-none"><i class="btn-down-vote fas fa-sort-down"></i></div>
-                <div class=""><i class="btn-remove-vote fas fa-sort-down text-warning"></i></div>
-                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary"></i></div>
+                <div class="d-none"><i class="btn-down-vote fas fa-sort-down mb-3"></i></div>
+                <div class=""><i class="btn-remove-vote fas fa-sort-down text-orange mb-3"></i></div>
+                <div class="d-none"><i class="btn-none-vote fas fa-sort-down text-secondary mb-3"></i></div>
             @endif
             @if($answer['checkRp'])
-                <div class="d-none"><i class="btn-up-report far fa-flag"></i></div>
-                <div class=""><i class="btn-remove-report text-secondary fas fa-flag"></i></div>
+                <div class="d-none"><i class="btn-up-report far fa-flag mb-3"></i></div>
+                <div class=""><i class="btn-remove-report text-secondary fas fa-flag mb-3"></i></div>
             @else
                 <div class=""><i class="btn-up-report far fa-flag"></i></div>
                 <div class="d-none"><i class="btn-remove-report text-secondary fas fa-flag"></i></div>
@@ -171,7 +171,7 @@
                         <a href="" class="me-2">Follow</a>
                     </div>
                     <div class="border shadow-sm rounded" style="width: 250px">
-                        <div class="bg-light p-2">
+                        <div class="bg-blue p-2">
                             <div class="">
                                 answered <span>{{ $answer['timeAnswered'] }}</span>
                             </div>
@@ -232,7 +232,24 @@
     </div>
     </div>
     <div class="col-3">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, illo aspernatur odio ratione velit facilis optio expedita pariatur. Obcaecati, voluptatem sequi saepe eligendi voluptates voluptatum minus ratione accusantium minima tempore?
+        <div class="card mb-3 shadow-box">
+            <div class="card-header fw-bold text-center bg-info">
+            Guideline
+            </div>
+            <div class="card-body bg-blue fs-6">
+                <ul>
+                    <li>You can view the article by clicking on the corresponding article</li>
+                    <li>You can create a new question</li>
+                    <li>Latest announcements
+                        <ol>
+                            <li>Admin</li>
+                            <li>Job</li>
+                            <li>Technology</li>
+                        </ol>
+                    </li>
+                    <li>Scroll to the bottom of the page to enter your answer</li>
+                </ul>
+            </div>
     </div>
 </div>
 

@@ -1,37 +1,39 @@
 @extends('layouts.home-header')
 @section('content')
 <div class="row px-5 bg-white">
-    <div class="col-2 border-end flex p-0">
+    <div class="col-2 border-end flex p-0 fs-5">
     <div id="fixed-navbar" class="flex-grow-1 flex-shrink-0 py-3 bg-white float-end" >
         <!-- <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
             <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
         </a> -->
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
-                <a class="btn btn-toggle d-flex justify-content-start rounded @yield('home')" href="{{ route('home') }}"  aria-expanded="false"><i class="fas fa-home me-1"></i> 
+                <a class="btn btn-toggle d-flex justify-content-start align-items-center fs-4 rounded @yield('home')" href="{{ route('home') }}"  aria-expanded="false"><i class="fas fa-home me-2"></i> 
                     Home
                 </a>
             </li>
             <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"><i class="fas fa-globe-americas"></i>
+                <button class="btn btn-toggle align-items-center rounded fs-4" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"><i class="fas fa-globe-americas"></i>
                 Pubic
                 </button>
                 <div class="collapse ps-5 show" id="dashboard-collapse" style="">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li class="p-2 @yield('questions')"><a href="#" class="link-dark rounded">Questions</a></li>
-                        <li class="p-2 @yield('tags')"><a href="#" class="link-dark rounded">Tags</a></li>
+                        <li class="p-2 @yield('tags')"><a href="{{ route('tags') }}" class="link-dark rounded">Tags</a></li>
                         <li class="p-2 @yield('users')"><a href="{{ route('users.list') }}" class="link-dark rounded">Users</a></li>
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false"><i class="fas fa-newspaper"></i>
+            <button class="btn btn-toggle align-items-center rounded fs-4" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false"><i class="fas fa-newspaper"></i>
                 News
             </button>
+            
             <div class="collapse ps-5 show" id="orders-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li class="p-2"><a href="#" class="link-dark rounded">New</a></li>
-                    <li class="p-2"><a href="#" class="link-dark rounded">Processed</a></li>
+                    <li class="p-2"><a href="{{ route('news', 'admin') }}" class="link-dark rounded @yield('admin') ">Admin</a></li>
+                    <li class="p-2"><a href="{{ route('news', 'job') }}" class="link-dark rounded @yield('job')">Job</a></li>
+                    <li class="p-2"><a href="{{ route('news', 'technology') }}" class="link-dark rounded @yield('technology')">Technology</a></li>
                 </ul>
             </div>
             </li>

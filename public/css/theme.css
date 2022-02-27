@@ -48,6 +48,12 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     box-sizing: border-box;
 }
 
+/* custom */
+tag-color{
+    background-color: #9999CC;
+}
+
+/*********** */
 ul {
     margin: 0;
 }

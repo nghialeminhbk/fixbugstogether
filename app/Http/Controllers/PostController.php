@@ -256,6 +256,14 @@ class PostController extends Controller
         ]);
     }
 
+    public function removeReportById($id){
+        $report = Report::find($id);
+        $result = $report->delete();
+        return response()->json([
+            'message' => $result?'Remove report successful !':'Remove report fail!'
+        ]);
+    }
+
     public function questionDetail($id){
         $question = Question::find($id);
         $post = $question->post()->first();

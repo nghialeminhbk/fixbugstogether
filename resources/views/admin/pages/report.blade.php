@@ -39,7 +39,7 @@
             <tr>
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $report->content }}</td>
-                <td><button value="{{ $report['post_id'] }}"  type="button" class="btn-view btn-success rounded" style="width: 20px; height: 20px"></button></td>
+                <td><button value="{{ $report['post_id'] }}" questionId="{{ $report['questionId'] }}" customerId="{{ $report['customerId'] }}" type="button" class="btn-view btn-success rounded" style="width: 20px; height: 20px"></button></td>
                 <td>{{ $report['sendBy'] }}</td>
                 <td>2020-12-10 20:30</td>
                 <td><button value="{{ $report['id'] }}" type="button" class="btn-skip bg-warning text-white rounded" width="50" height="50" >Skip <i class="fas fa-step-forward"></i></button></td>
@@ -73,14 +73,14 @@
 <script>
     $('.btn-view').click(function(e){
         const id = $(this).attr("value");
+        const questionId = $(this).attr("questionId");
+        const customerId = $(this).attr("customerId");
         console.log(id);
         const url = "http://127.0.0.1:8000/posts/detail/" + id;
         console.log(url);
         $('#modal-title').html('View detail');
         $('#modal-content').html("loading...");
         $('#modal').modal('show');
-        $('#btn-del').removeClass('d-none');
-        $('#btn-del').attr('value', id);
         $.ajax({
             type: "GET",
             url: url,
@@ -88,6 +88,10 @@
             success: function (response) {
                 console.log("success");
                 $('#modal-content').html(response);
+                $('#btn-del').removeClass('d-none');
+                $('#btn-del').attr('value', id);
+                $('#btn-del').attr('questionId', questionId);
+                $('#btn-del').attr('customerId', customerId);
             }
         });
     });
@@ -102,7 +106,7 @@
         const id = $(this).attr("value");
         $('#modal').modal('show');
         $('#btn-confirm').removeClass('d-none');
-        $('#modal-title').html('Delete user');
+        $('#modal-title').html('Skip this report!');
         $('#modal-content').html("<span class='text-danger'>Are u sure with this action!</span>");
         $('#btn-confirm').attr('value', id);
     })
@@ -110,7 +114,7 @@
     $('#btn-confirm').click(function(e){
         const id = $(this).attr("value");
         console.log(id);
-        const url = "http://127.0.0.1:8000/users/delete/" + id;
+        const url = "http://127.0.0.1:8000/report/delete/" + id;
         $("#modal").modal('hide');
         $.ajax({
             type: "GET",
@@ -124,18 +128,43 @@
 
     $('#btn-del').click(function(){
         const id = $(this).attr("value");
-        console.log(id);
-        const url = "http://127.0.0.1:8000/posts/delete/" + id;
+        const questionId = $(this).attr("questionId");
+        const customerId = $(this).attr("customerId");
         $('#btn-del').addClass('d-none');
         $("#modal").modal('hide');
         $.ajax({
             type: "GET",
-            url: url,
+            url: "http://127.0.0.1:8000/posts/delete/" + id,
             dataType: "json",
             success: function (response) {
                 toastr.success(response['message']);
             }
         });
+
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/report/delete/" + id,
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response['message']);
+            }
+        });
+
+        $.ajax({
+           type: "POST",
+           url: "{{ route('notifications.create') }}",
+           data: {
+            "_token": "{{ csrf_token() }}", 
+            "content": "đã xóa bài viết của bạn trong chủ đề",
+            "customerId": customerId,
+            "senderId": {{ auth()->user()->id }},
+            "questionId": questionId
+           },
+           dataType: "json",
+           success: function (response) {
+               console.log("create notification!");
+           }
+       });
     })
 </script>
 @endsection

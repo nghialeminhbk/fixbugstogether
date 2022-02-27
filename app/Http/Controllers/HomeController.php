@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\User;
+use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -14,7 +15,8 @@ class HomeController extends Controller
     public function home(){
         if(Auth::check()){
             $user = Auth::user();
-            $questions = Question::all();
+            $questions = Question::withCount('answer')->get();
+            $questionCount = count($questions);
             $questionsData = array();
             $now = Carbon::now();
             foreach($questions as $question){
@@ -22,12 +24,14 @@ class HomeController extends Controller
                     'id'        => $question->id,
                     'title'     => $question->title,
                     'tags'      => $question->tag()->get(),
+                    'countAns'  => $question->answer_count,
                     'timeAsked' => $question->post()->first()->created_at->diffForHumans($now),
-                    'userAsked' => $question->post()->first()->user()->first()->name
+                    'userAsked' => $question->post()->first()->user()->first()
                 ]);
             }
             return view('user.home', [
-                'questions' => $questionsData
+                'questions' => $questionsData,
+                'top'       => $questionCount>3?3:$questionCount
             ]);
         }
 
@@ -47,6 +51,12 @@ class HomeController extends Controller
                 $user->createdAt = $user->created_at->diffForHumans(Carbon::now());
                 return $user; 
             });
+        }elseif(substr($keySearch, 0, 4) == 'tag:'){
+            $keySearch = substr($keySearch, 4);
+            $result = Tag::where('tag_name','like','%'.$keySearch.'%')->get();
+            foreach($result as $tag){
+                $tag->description = $tag->description?$tag->description:"No description";
+            }
         }else{
             $result = Question::where('title', 'like', '%'.$keySearch.'%')->withCount('answer')->get();
             $result = $result->map(function($question){
@@ -58,8 +68,10 @@ class HomeController extends Controller
         }  
 
         return view('search', [
+            'resultCount'    => $result->count(),
             'resultUser'     => $result->count()>0 && $result[0]['name']?$result:null,
             'resultQuestion' => $result->count()>0 && $result[0]['title']?$result:null,
+            'resultTag'      => $result->count()>0 && $result[0]['tag_name']?$result:null,
             'resultEmpty'    => $result->count() == 0?"No result return!":null
         ]);
     }

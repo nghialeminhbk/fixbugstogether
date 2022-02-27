@@ -105,8 +105,11 @@ class AdminController extends Controller
         $reports = Report::paginate(10);
         $total = $reports->count();
         foreach($reports as $report){
+            $questionTemp = Post::find($report->post_id)->question();
             $report->content = Str::limit($report->content, 20);
             $report->sendBy = User::find($report->customer_id)->name;
+            $report->questionId = $questionTemp->id;
+            $report->customerId = $questionTemp->customer_id;
         }
         return view('admin.pages.report', [
             'total' => $total,

@@ -9,6 +9,21 @@ use Illuminate\Support\Str;
 class TagController extends Controller
 {
     //  
+
+    public function viewTags(){
+        $tags = Tag::withCount('questionTag')->get();
+        $tagCount = count($tags);
+        foreach($tags as $tag){
+            $tag->description = $tag->description??"No description for this tag!";
+        }
+        return view('tag.listTag', [
+            'data' => [
+                'tags' => $tags,
+                'totalTags' => $tagCount
+            ]
+        ]);
+    }
+
     public function suggest(Request $request){
         $keySearch = $request->string;
         $pos = strrpos($keySearch, ',')?strrpos($keySearch, ',') + 1:0;

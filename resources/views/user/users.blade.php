@@ -3,7 +3,7 @@
 @section('users', 'bg-light fw-bold')
 @section('sub_content')
 <div class="title--users">
-    <h2>List Users</h2>
+    <h2>List Users (<span class="text-primary fs-2">{{ $totalUsers }}</span> users)</h2>
 </div>
 <div class="list-users">
     <div class="row">
