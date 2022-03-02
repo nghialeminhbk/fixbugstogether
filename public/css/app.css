@@ -15,6 +15,18 @@
   background-color: #d2d2f1;
 }
 
+.txt-shadow{
+  text-shadow: 2px 2px #6FD1F7;
+}
+
+.bg-chamthan{
+  background-color: #133D5E;
+}
+
+.bg-chamthan1{
+  background-color: #5377B0;
+}
+
 .bg-blue{
   background-color: #cdd8e7;
 }

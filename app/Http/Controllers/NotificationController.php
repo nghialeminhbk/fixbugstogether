@@ -44,7 +44,8 @@ class NotificationController extends Controller
             $notification->createdAt = $notification->created_at->diffForHumans(Carbon::now());
         }
         return view('notification.notifications_list', [
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'userId'        => $userId
         ]);
     }
 
@@ -70,6 +71,13 @@ class NotificationController extends Controller
          
         return response()->json([
             'message' => 'success!'
+        ]);
+    }
+
+    public function deleteAllNotificationsByUserId($userId){
+        $result = Notification::where('customer_id', $userId)->delete();
+        return response()->json([
+            'message' => $result > 0?'Delete success!':'Delete fail!' 
         ]);
     }
 }

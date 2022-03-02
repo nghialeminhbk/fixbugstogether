@@ -1,12 +1,12 @@
 @extends('layouts.welcome')
 
 @section('content')
-<main class="signup-form my-3">
+<main class="signup-form my-5">
     <div class="cotainer">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center p-3">
             <div class="col-md-4">
-                <div class="card">
-                    <h3 class="card-header text-center">Register User</h3>
+                <div class="card shadow-box">
+                    <h3 class="card-header text-center txt-shadow fw-bold bg-body">Register User</h3>
                     <div class="card-body">
 
                         <form action="{{ route('register.custom') }}" method="POST">
@@ -48,6 +48,16 @@
 
                     </div>
                 </div>
+            </div>
+            <div class="col-md-3">
+                For successful signup, you need:
+                <ul>
+                    <li>Fill in all the information</li>
+                    <li>Enter the correct information</li>
+                    <li>
+Select remember if you don't want to log in again next time</li>
+                </ul>
+                Wish you have the best web experience !
             </div>
         </div>
     </div>

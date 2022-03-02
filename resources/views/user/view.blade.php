@@ -4,9 +4,9 @@
 @section('sub_content')
 <div class="container_ px-3">
     <div class="avt d-flex mb-3">
-        <img src="{{ asset($image) }}" class="avt rounded img-fluid img-thumbnail" alt="" style="height: 140px; width: 140px">
+        <img src="{{ asset($image) }}" class="avt rounded img-fluid img-thumbnail shadow-box" alt="" style="height: 140px; width: 140px">
         <div class="info d-flex flex-column px-2">
-            <h2 class="name">{{ $displayName }}</h2>
+            <h2 class="name txt-shadow">{{ $displayName }}</h2>
             <span class="active fs-5">{{ $title }}</span>
             <span class="active"><i class="far fa-clock"></i> {{ $timeJoined }}</span>
             <span class="location"><i class="fas fa-map-marker-alt"></i> {{ $location }}</span>
@@ -24,7 +24,7 @@
         <div class="row mb-3">
             <div class="col-3 px-3">
                 <h5 class="fw-bold">Stats</h5>
-                <div class="row p-2 border rounded">
+                <div class="row p-2 border rounded border-dark">
                     <div class="col-6 py-2 text-center">
                         <div>{{ $postCount }}</div>
                         <div class="fw-bold">posts</div>

@@ -119,7 +119,13 @@
             </div>
             <div class="col-4">
                 <div class="p-3 shadow-sm bg-white border">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, quidem voluptates autem ducimus doloremque quasi corporis facilis voluptatem? Rerum illum omnis sed quidem cupiditate est quas blanditiis. Eos, facere asperiores! Rerum dolorum dolores fugiat? Vitae pariatur delectus vel rem veritatis, sunt minus unde. Ullam odit quisquam voluptatum minus modi tenetur maiores fugit alias. Possimus molestiae aliquam quos exercitationem. Modi aut, optio odio voluptates quo commodi corrupti ut asperiores repellat eum iure placeat laborum animi praesentium unde quibusdam illum odit voluptas dolorum minima vitae quidem nesciunt blanditiis! Ipsum animi accusamus libero? Provident enim voluptate facilis doloremque odit eveniet quam, vel ratione.
+                Follow these rules for a quality news
+                    <ul>
+                        <li>Fill in the fields completely</li>
+                        <li>Avoid posting duplicate news</li>
+                        <li>Choose the exact type to post</li>
+                        <li>The content of the new should not be less than 50 words</li>
+                    </ul>
                 </div>
             </div>
         </div>

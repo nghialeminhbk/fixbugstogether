@@ -1,6 +1,6 @@
 @extends('layouts.home-navbar')
 @section('title', 'news '.$data['type'].' -')
-@section($data['type'], 'bg-light fw-bold text-decoration-underline')
+@section($data['type'], 'bg-light fw-bold')
 @section('sub_content')
 <div class="p-3">
     <h3>[{{ ucfirst($data['type']) }}]</h3>

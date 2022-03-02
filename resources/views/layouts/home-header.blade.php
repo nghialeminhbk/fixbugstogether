@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('header')
-<header class="p-3 sticky-top border-bottom bg-dark">
+<header class="p-3 sticky-top border-bottom bg-chamthan">
 <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     <a href="/" class="d-flex align-items-center mb-2 me-2 mb-lg-0 text-white text-decoration-none">
@@ -21,7 +21,7 @@
 
     <div class="dropdown text-white">
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownNotify" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="position-relative btn btn-dark" id="notifications">
+            <div class="position-relative btn btn-info" id="notifications">
                 <i class="fs-4 fas fa-bell"></i>
                 <span id="badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
                     0

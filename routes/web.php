@@ -91,7 +91,7 @@ Route::get('/notifications/dropdown/{userId}', [NotificationController::class,'v
 Route::get('/notifications/read/{id}', [NotificationController::class, 'setCheckNotification'])->name('notifications.read');
 Route::get('/notifications/{userId}', [NotificationController::class, 'viewNotificationsList'])->name('notifications.list');
 Route::post('/notifications', [NotificationController::class, 'createNotification'])->name('notifications.create');
-
+Route::get('/notifications/delete/{userId}', [NotificationController::class, 'deleteAllNotificationsByUserId'])->name('notifications.delete');
 //news
 Route::get('/news/{type}', [NewsController::class, 'getList'])->name('news');
 Route::get('/news/{type}/{id}', [NewsController::class, 'getDetail'])->name('news.detail');

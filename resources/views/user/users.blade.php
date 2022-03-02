@@ -9,7 +9,7 @@
     <div class="row">
         @foreach($customers as $customer)
         <div class="col-3 d-flex align-items-center">
-            <img src="{{ asset($customer->image) }}" alt="" style="width: 90px; height: 90px" class="img-fluid img-thumbnail rounded">
+            <img src="{{ asset($customer->image) }}" alt="" style="width: 90px; height: 90px" class="img-fluid img-thumbnail rounded shadow-box">
             <div class="d-flex flex-column flex-grow-1 p-2">
                 <a href="{{ route('users.view', $customer->id) }}" class="fw-bold text-primary">{{ $customer->user()->name }}</a>
                 <span class="location text-muted">{{ $customer->location }}</span>

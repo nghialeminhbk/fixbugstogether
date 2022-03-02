@@ -3,7 +3,10 @@
 @section('title', 'All Notifications - ') 
 @section('content')
 <div class="container py-3">
-<h3 class="mb-3">List notifications</h3>
+<div class="d-flex justify-content-between align-items-center">
+    <h3 class="mb-3">List notifications</h3>
+    <a href="" class="text-danger" class="btn-del">Delete all notifications!</a>
+</div>
 @if(count($notifications) == 0)
 <h3 class="text-danger"><i class="far fa-times-circle"></i> No notifications...</h3>
 @else
@@ -35,6 +38,16 @@
             dataType: "json",
             success: function (response) {
                 console.log(response['message']);
+            }
+        });
+    })
+    $(".btn-del").click(function(){
+        $.ajax({
+            type: "GET",
+            url: "/notifications/delete/{{ $userId }}",
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response['message']);
             }
         });
     })
